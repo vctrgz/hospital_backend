@@ -1,6 +1,6 @@
 package springboot.hospital;
 
-public class loginRequest {
+public class LoginRequest {
 	String user;
 	String password;
  

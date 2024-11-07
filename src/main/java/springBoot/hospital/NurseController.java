@@ -15,14 +15,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import springboot.hospital.dao.nurseRepository;
+import springboot.hospital.dao.NurseRepository;
 import springboot.entity.Nurse;
 
 @RestController
 @RequestMapping("/nurse")
-public class nurseController {
+public class NurseController {
     @Autowired
-    private nurseRepository nurseRepository;
+    private NurseRepository nurseRepository;
     private Iterable<Nurse>nurses;
 
     // Get all registered nurses
@@ -33,7 +33,7 @@ public class nurseController {
     
     // Login functionality
     @PostMapping("/login")	
-	public @ResponseBody ResponseEntity<Boolean> login(@RequestBody loginRequest loginRequest) {
+	public @ResponseBody ResponseEntity<Boolean> login(@RequestBody LoginRequest loginRequest) {
 		boolean loginCorrecto = false;
 		nurses = getAllNurses();
 		for (Nurse nurse : nurses) {
