@@ -7,10 +7,10 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
 
 @SpringBootApplication
 @EntityScan(basePackages = "SpringBoot.entity") 
-public class hospitalApplication extends SpringBootServletInitializer{
+public class HospitalApplication extends SpringBootServletInitializer{
 
 	public static void main(String[] args) {
-		SpringApplication.run(hospitalApplication.class, args);
+		SpringApplication.run(HospitalApplication.class, args);
 	}
 
 }

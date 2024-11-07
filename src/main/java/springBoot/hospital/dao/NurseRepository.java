@@ -9,6 +9,6 @@ import springboot.entity.Nurse;
 // CRUD refers Create, Read, Update, Delete
 
 
-public interface nurseRepository extends CrudRepository<Nurse, Integer> {
+public interface NurseRepository extends CrudRepository<Nurse, Integer> {
 
 }
