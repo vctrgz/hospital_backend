@@ -1,4 +1,4 @@
-package springboot.hospital;
+package springBoot.hospital;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import springboot.hospital.dao.NurseRepository;
-import springboot.entity.Nurse;
+import springBoot.hospital.dao.NurseRepository;
+import springBoot.entity.Nurse;
 
 @RestController
 @RequestMapping("/nurse")

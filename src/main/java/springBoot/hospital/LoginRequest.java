@@ -1,4 +1,4 @@
-package springboot.hospital;
+package springBoot.hospital;
 
 public class LoginRequest {
 	String user;
