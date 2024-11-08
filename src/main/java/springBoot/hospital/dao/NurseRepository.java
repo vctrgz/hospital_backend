@@ -1,6 +1,8 @@
 package springBoot.hospital.dao;
 
 
+import java.util.Optional;
+
 import org.springframework.data.repository.CrudRepository;
 
 import springBoot.entity.Nurse;
@@ -10,5 +12,6 @@ import springBoot.entity.Nurse;
 
 
 public interface NurseRepository extends CrudRepository<Nurse, Integer> {
-
+	Optional<Nurse> findByUserAndPassword(String user, String password);
+	Optional<Nurse> findByName(String name);
 }
