@@ -2,6 +2,7 @@ package springBoot.hospital;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -23,24 +24,21 @@ import springBoot.entity.Nurse;
 public class NurseController {
     @Autowired
     private NurseRepository nurseRepository;
-    private Iterable<Nurse>nurses;
-
+    
     // Get all registered nurses
     @GetMapping("/nurses")
-    public Iterable<Nurse> getAllNurses() {
-        return nurseRepository.findAll();
+    public @ResponseBody ResponseEntity<Iterable<Nurse>> getAllNurses() {
+        return ResponseEntity.ok(nurseRepository.findAll());
     }
     
     // Login functionality
     @PostMapping("/login")	
-	public @ResponseBody ResponseEntity<Boolean> login(@RequestBody LoginRequest loginRequest) {
+	public @ResponseBody ResponseEntity<Boolean> login(@RequestBody Nurse nurse) {
 		boolean loginCorrecto = false;
-		nurses = getAllNurses();
-		for (Nurse nurse : nurses) {
-			if (nurse.getUser().equals(loginRequest.getUser()) && nurse.getPassword().equals(loginRequest.getPassword())) {
-				loginCorrecto = true;
-				break;
-			}
+		Optional<Nurse> loggedNurse;
+		loggedNurse = nurseRepository.findByUserAndPassword(nurse.getUser(), nurse.getPassword());
+		if (loggedNurse.isPresent()) {
+			loginCorrecto = true;
 		}
 		if (loginCorrecto) {
 			return ResponseEntity.ok(loginCorrecto);
@@ -52,12 +50,11 @@ public class NurseController {
     // Find nurse by name
     @GetMapping("/name/{name}")
     public ResponseEntity<Nurse> findByName(@PathVariable String name) {
-    	nurses = getAllNurses();
-        for (Nurse nurse : nurses) {
-            if (name.equals(nurse.getName())) {
-                return ResponseEntity.ok(nurse);
-            }
-        }
+        Optional<Nurse> loggedNurse;
+		loggedNurse = nurseRepository.findByName(name);
+		if (loggedNurse.isPresent()) {
+			return ResponseEntity.ok(loggedNurse.get());
+		}
         return ResponseEntity.notFound().build();
     }
 }
