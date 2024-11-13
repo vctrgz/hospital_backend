@@ -57,5 +57,22 @@ public class NurseController {
 		}
         return ResponseEntity.notFound().build();
     }
+    
+    // Find nurse by id
+ // Endpoint to find nurse by id
+ 	@GetMapping("/findnursebyid/{id}")
+ 	public @ResponseBody ResponseEntity<?> getNurseById(@PathVariable int id) {
+ 	    // Find nurse by id
+ 	    Optional<Nurse> nurse = nurseRepository.findById(id);
+
+ 	    // If nurse is not found
+ 	    if (!nurse.isPresent()) {
+ 	        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Nurse not found"); // 404 Not Found
+ 	    }
+
+ 	    // If nurse is found
+ 	    return ResponseEntity.ok(nurse.get()); // 200 OK
+ 	}
+
 }
 
