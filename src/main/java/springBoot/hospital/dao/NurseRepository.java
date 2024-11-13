@@ -11,7 +11,8 @@ import springBoot.entity.Nurse;
 // CRUD refers Create, Read, Update, Delete
 
 
-public interface NurseRepository extends CrudRepository<Nurse, Integer> {
+public interface NurseRepository extends CrudRepository<Nurse, Long> {
 	Optional<Nurse> findByUserAndPassword(String user, String password);
 	Optional<Nurse> findByName(String name);
+	Optional<Nurse> findById(Integer Id);
 }
