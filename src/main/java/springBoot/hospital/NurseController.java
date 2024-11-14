@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -44,6 +45,27 @@ public class NurseController {
 			return ResponseEntity.ok(loginCorrecto);
 		}else {
 			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(loginCorrecto);
+		}
+	}
+    
+    @PostMapping("/update")	
+    public @ResponseBody ResponseEntity<Optional<Nurse>> updateNurse(@RequestBody Nurse nurse, @RequestParam String newName, @RequestParam String newUser, @RequestParam String newPassword) {
+		Optional<Nurse> updatingNurse;
+		updatingNurse = nurseRepository.findById(nurse.getId());
+		if (updatingNurse.isPresent()) {
+			updatingNurse.get().setName(newName);
+			updatingNurse.get().setUser(newUser);
+			updatingNurse.get().setPassword(newPassword);
+		    nurseRepository.updateNameById(updatingNurse.get().getName(), updatingNurse.get().getId());
+		    nurseRepository.updatePasswordById(updatingNurse.get().getPassword(), updatingNurse.get().getId());
+		    nurseRepository.updateUserById(updatingNurse.get().getUser(), updatingNurse.get().getId());
+			if (updatingNurse.get().getName() == null || updatingNurse.get().getUser() == null || updatingNurse.get().getPassword() == null) {
+				return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(updatingNurse);
+			}else {
+				return ResponseEntity.ok(updatingNurse);				
+			}
+		}else {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(updatingNurse);
 		}
 	}
 	
