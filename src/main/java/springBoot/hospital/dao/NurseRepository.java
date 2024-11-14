@@ -14,9 +14,10 @@ import springBoot.entity.Nurse;
 // CRUD refers Create, Read, Update, Delete
 
 
-public interface NurseRepository extends CrudRepository<Nurse, Integer> {
+public interface NurseRepository extends CrudRepository<Nurse, Long> {
 	Optional<Nurse> findByUserAndPassword(String user, String password);
 	Optional<Nurse> findByName(String name);
+	Optional<Nurse> findById(Integer Id);
 	  // Método para actualizar el nombre del enfermero por su ID
     @Modifying
     @Transactional
@@ -34,4 +35,6 @@ public interface NurseRepository extends CrudRepository<Nurse, Integer> {
     @Transactional
     @Query("UPDATE Nurse n SET n.password = :password WHERE n.id = :id")
     void updatePasswordById(String password, Integer id);
+
+
 }
