@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import springBoot.hospital.dao.NurseRepository;
 import springBoot.entity.Nurse;
 
@@ -59,7 +58,18 @@ public class NurseController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(updatingNurse);
         }
     }
-
+    
+    @PostMapping("/create")	
+    public @ResponseBody ResponseEntity<Nurse> createNurse(@RequestBody Nurse nurse) {
+		try {
+			Nurse createdNurse = nurseRepository.save(nurse);
+			return ResponseEntity.status(HttpStatus.CREATED).body(createdNurse);
+		} catch (Exception e) {
+			// TODO: handle exception
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+		}
+	}
+    
     // Find nurse by name
     @GetMapping("/name/{name}")
     public ResponseEntity<Nurse> findByName(@PathVariable String name) {
@@ -72,8 +82,8 @@ public class NurseController {
     }
 
     // Delete nurse by ID
-    @DeleteMapping("/deletenurse/{id}")
-    public ResponseEntity<String> deleteNurseById(@PathVariable int id) {
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<String> deleteNurseById(@PathVariable Long id) {
         if (nurseRepository.existsById(id)) {
             nurseRepository.deleteById(id);
             return ResponseEntity.ok("Nurse deleted successfully");
@@ -83,7 +93,7 @@ public class NurseController {
     }
 
     // Find nurse by ID
-    @GetMapping("/findnursebyid/{id}")
+    @GetMapping("/id/{id}")
     public @ResponseBody ResponseEntity<?> getNurseById(@PathVariable int id) {
         Optional<Nurse> nurse = nurseRepository.findById(id);
         if (!nurse.isPresent()) {
