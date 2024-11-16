@@ -1,4 +1,14 @@
-# HOSPITAL PROJECT v1 - HEALTH DATA - SPRING-BOOT
+# HOSPITAL PROJECT - BACKEND API
+
+This project is a backend service for the management of nurses in a hospital. It allows to perform CRUD operations (Create, Read, Update, Delete). 
+
+### Endpoints available
+- `GET /nurse/nurses`: Get all nurses.
+- `POST /nurse/login`: Authenticate a nurse.
+- `POST /nurse/create`: Create a new nurse.
+- `POST /nurse/update`: Update the data of a nurse.
+- `DELETE /nurse/delete/{id}`: Delete a nurse by ID.
+
 
 ### a. Work distribution among the different members of the group with their own project and repository:		  
 1. Information of all registered nurses **-Albert**  
