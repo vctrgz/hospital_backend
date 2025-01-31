@@ -15,7 +15,7 @@ import springBoot.entity.Nurse;
 
 
 public interface NurseRepository extends CrudRepository<Nurse, Long> {
-	Optional<Nurse> findByUserAndPassword(String user, String password);
+	Optional<Nurse> findByNameAndPassword(String name, String password);
 	Optional<Nurse> findByName(String name);
 	Optional<Nurse> findById(Integer Id);
 	  // Método para actualizar el nombre del enfermero por su ID
@@ -35,6 +35,5 @@ public interface NurseRepository extends CrudRepository<Nurse, Long> {
     @Transactional
     @Query("UPDATE Nurse n SET n.password = :password WHERE n.id = :id")
     void updatePasswordById(String password, Integer id);
-
 
 }
