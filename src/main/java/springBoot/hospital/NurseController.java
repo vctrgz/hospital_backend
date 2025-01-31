@@ -23,17 +23,14 @@ public class NurseController {
 
     // Login functionality
     @PostMapping("/login")    
-    public @ResponseBody ResponseEntity<Boolean> login(@RequestBody Nurse nurse) {
-        boolean loginCorrecto = false;
+    public @ResponseBody ResponseEntity<Optional<Nurse>> login(@RequestBody Nurse nurse) {
         Optional<Nurse> loggedNurse;
-        loggedNurse = nurseRepository.findByUserAndPassword(nurse.getUser(), nurse.getPassword());
+        loggedNurse = nurseRepository.findByNameAndPassword(nurse.getName(), nurse.getPassword());
         if (loggedNurse.isPresent()) {
-            loginCorrecto = true;
+            return ResponseEntity.ok(loggedNurse);
         }
-        if (loginCorrecto) {
-            return ResponseEntity.ok(loginCorrecto);
-        } else {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(loginCorrecto);
+        else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(loggedNurse);
         }
     }
 
@@ -61,11 +58,16 @@ public class NurseController {
     
     @PostMapping("/create")	
     public @ResponseBody ResponseEntity<Nurse> createNurse(@RequestBody Nurse nurse) {
-		try {
-			Nurse createdNurse = nurseRepository.save(nurse);
-			return ResponseEntity.status(HttpStatus.CREATED).body(createdNurse);
-		} catch (Exception e) {
-			// TODO: handle exception
+    	Optional<Nurse> newNurse = nurseRepository.findByName(nurse.getName());
+    	if (!newNurse.isPresent()) {
+    		try {
+    			Nurse createdNurse = nurseRepository.save(nurse);
+    			return ResponseEntity.status(HttpStatus.CREATED).body(createdNurse);
+    		} catch (Exception e) {
+    			// TODO: handle exception
+    			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+    		}			
+		}else {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
 		}
 	}
