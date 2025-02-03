@@ -7,11 +7,11 @@ import jakarta.persistence.Id;
 
 @Entity
 public class Nurse {
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Integer id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
 
-	private String name;
+    private String name;
     private String user;
     private String password;
     private String profilePictureUrl; 
@@ -40,28 +40,26 @@ public class Nurse {
     public void setName(String name) {
         this.name = name;
     }
-
-    // Getter and setter for 'user'
-    public String getUser() {
-        return user;
+  
+    public String getUser() { 
+      return user; 
     }
-    public void setUser(String user) {
-        this.user = user;
+    public void setUser(String user) { 
+      this.user = user; 
     }
 
-    // Getter and setter for 'password'
     public String getPassword() {
-        return password;
+      return password; 
     }
     public void setPassword(String password) {
-        this.password = password;
+      this.password = password; 
     }
-    
+  
     public String getProfilePictureUrl() {
     	return profilePictureUrl; 
 	}
     public void setProfilePictureUrl(String profilePictureUrl) {
     	this.profilePictureUrl = profilePictureUrl; 
 	}
+  
 }
-

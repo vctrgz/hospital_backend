@@ -1,4 +1,40 @@
-# HOSPITAL PROJECT v1 - HEALTH DATA - SPRING-BOOT
+# HOSPITAL PROJECT - BACKEND API
+
+## Installation
+### Prerequisites
+- Java 17 or higher
+- Maven
+- MySQL
+
+### Installation Steps
+1. Clone the repository:
+   ```sh
+   git clone https://github.com/vctrgz/hospital_backend.git
+   ```
+2. Change to the project directory:
+   ```sh
+   cd hospital_backend
+   ```
+3. Set up the database:
+   - Create a MySQL database named `hospital`.
+   - Update the `application.properties` file with the database credentials.
+4. Build the project and install dependencies:
+   ```sh
+   mvn clean install
+   ```
+
+### Available Endpoints
+- **GET /nurse/nurses**: Get all registered nurses.
+- **POST /nurse/login**: Authenticate a nurse.
+  - Request body: `{ "user": "username", "password": "password" }`
+- **POST /nurse/create**: Create a new nurse.
+  - Request body: `{ "name": "name", "user": "email", "password": "password" }`
+- **POST /nurse/update**: Update the information of an existing nurse.
+  - Request body: `{ "id": "nurse_id", "newName": "new_name", "newUser": "new_user", "newPassword": "new_password" }`
+- **GET /nurse/name/{name}**: Find nurse by name.
+- **GET /nurse/id/{id}**: Get nurse details by ID.
+- **DELETE /nurse/delete/{id}**: Delete a nurse by ID.
+
 
 ### a. Work distribution among the different members of the group with their own project and repository:		  
 1. Information of all registered nurses **-Albert**  
@@ -24,6 +60,14 @@
 	- See a graph of the evolution of different vital 
       constants in a given period of time
 
+## Usage
+### Running the Project
+To start the application:
+```sh
+mvn spring-boot:run
+```
+The application will be available at `http://localhost:8080`.
+
 > **It is desired to record which nurse is the author of each modification 
 > and new data record**
 
@@ -31,3 +75,6 @@
 > * Program that allows the entry of these in an orderly and easy way.
 > * Easy to use and incorporating all patient data.
 > * The data referring to the vital constants are reflected in graphic format.
+
+## License
+This project is licensed under the MIT License.

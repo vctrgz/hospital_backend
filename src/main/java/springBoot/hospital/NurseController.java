@@ -114,4 +114,3 @@ public class NurseController {
         return ResponseEntity.ok(nurse.get());
     }
 }
-
