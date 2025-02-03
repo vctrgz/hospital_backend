@@ -14,30 +14,52 @@ public class Nurse {
     private String name;
     private String user;
     private String password;
-    private String profilePictureUrl;  // 🔹 Nuevo campo para la imagen
-
+    private String profilePictureUrl; 
+    
     public Nurse() {}
-
+    
     public Nurse(String name, String user, String password, String profilePictureUrl) {
         this.name = name;
         this.user = user;
         this.password = password;
         this.profilePictureUrl = profilePictureUrl;
     }
+    
+    // Getter and setter for 'id'
+    public Integer getId() {
+    	return id;
+    }
+    public void setId(Integer id) {
+    	this.id = id;
+    }
+    
+    // Getter and setter for 'name'
+    public String getName() {
+        return name;
+    }
+    public void setName(String name) {
+        this.name = name;
+    }
+  
+    public String getUser() { 
+      return user; 
+    }
+    public void setUser(String user) { 
+      this.user = user; 
+    }
 
-    // Getters y Setters
-    public Integer getId() { return id; }
-    public void setId(Integer id) { this.id = id; }
-
-    public String getName() { return name; }
-    public void setName(String name) { this.name = name; }
-
-    public String getUser() { return user; }
-    public void setUser(String user) { this.user = user; }
-
-    public String getPassword() { return password; }
-    public void setPassword(String password) { this.password = password; }
-
-    public String getProfilePictureUrl() { return profilePictureUrl; }
-    public void setProfilePictureUrl(String profilePictureUrl) { this.profilePictureUrl = profilePictureUrl; }
+    public String getPassword() {
+      return password; 
+    }
+    public void setPassword(String password) {
+      this.password = password; 
+    }
+  
+    public String getProfilePictureUrl() {
+    	return profilePictureUrl; 
+	}
+    public void setProfilePictureUrl(String profilePictureUrl) {
+    	this.profilePictureUrl = profilePictureUrl; 
+	}
+  
 }
