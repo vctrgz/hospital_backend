@@ -17,8 +17,15 @@ public class NurseController {
 
     // Get all registered nurses
     @GetMapping("/nurses")
-    public @ResponseBody ResponseEntity<Iterable<Nurse>> getAllNurses() {
-        return ResponseEntity.ok(nurseRepository.findAll());
+    public ResponseEntity<Iterable<Nurse>> getAllNurses() {
+        Iterable<Nurse> nurses = nurseRepository.findAll();
+        // Verificar si hay imagenes asignadas
+        for (Nurse nurse : nurses) {
+            if (nurse.getProfilePictureUrl() == null || nurse.getProfilePictureUrl().isEmpty()) {
+                nurse.setProfilePictureUrl("https://static.nationalgeographicla.com/files/styles/image_3200/public/3897187267_f36b5e4e7a_c.webp?w=1600&h=1200");
+            }
+        }
+        return ResponseEntity.ok(nurses);
     }
 
     // Login functionality
@@ -61,6 +68,9 @@ public class NurseController {
     	Optional<Nurse> newNurse = nurseRepository.findByName(nurse.getName());
     	if (!newNurse.isPresent()) {
     		try {
+    			if (nurse.getProfilePictureUrl() == null || nurse.getProfilePictureUrl().isEmpty()) {
+                    nurse.setProfilePictureUrl("https://example.com/default-profile.jpg");
+                }
     			Nurse createdNurse = nurseRepository.save(nurse);
     			return ResponseEntity.status(HttpStatus.CREATED).body(createdNurse);
     		} catch (Exception e) {

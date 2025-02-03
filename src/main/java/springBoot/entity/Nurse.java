@@ -14,7 +14,16 @@ public class Nurse {
 	private String name;
     private String user;
     private String password;
-
+    private String profilePictureUrl; 
+    
+    public Nurse() {}
+    
+    public Nurse(String name, String user, String password, String profilePictureUrl) {
+        this.name = name;
+        this.user = user;
+        this.password = password;
+        this.profilePictureUrl = profilePictureUrl;
+    }
     
     // Getter and setter for 'id'
     public Integer getId() {
@@ -47,5 +56,12 @@ public class Nurse {
     public void setPassword(String password) {
         this.password = password;
     }
+    
+    public String getProfilePictureUrl() {
+    	return profilePictureUrl; 
+	}
+    public void setProfilePictureUrl(String profilePictureUrl) {
+    	this.profilePictureUrl = profilePictureUrl; 
+	}
 }
 
