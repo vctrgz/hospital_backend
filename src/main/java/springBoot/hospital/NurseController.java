@@ -43,12 +43,11 @@ public class NurseController {
 
     // Update nurse information
     @PostMapping("/update")    
-    public @ResponseBody ResponseEntity<Optional<Nurse>> updateNurse(@RequestBody Nurse nurse, @RequestParam String newName, @RequestParam String newUser, @RequestParam String newPassword) {
+    public @ResponseBody ResponseEntity<Optional<Nurse>> updateNurse(@RequestBody Nurse nurse, @RequestParam String newName, @RequestParam String newPassword) {
         Optional<Nurse> updatingNurse;
         updatingNurse = nurseRepository.findById(nurse.getId());
         if (updatingNurse.isPresent()) {
             updatingNurse.get().setName(newName);
-            updatingNurse.get().setUser(newUser);
             updatingNurse.get().setPassword(newPassword);
             nurseRepository.updateNameById(updatingNurse.get().getName(), updatingNurse.get().getId());
             nurseRepository.updatePasswordById(updatingNurse.get().getPassword(), updatingNurse.get().getId());
